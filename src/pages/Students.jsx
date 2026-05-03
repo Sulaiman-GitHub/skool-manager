@@ -53,6 +53,14 @@ export default function Students() {
     setLoading(false)
   }
 
+  const deleteStudent = async (id) => {
+    if (!window.confirm('Are you sure you want to delete this student? This will also delete their fees and attendance records.')) return
+    await supabase.from('fees').delete().eq('student_id', id)
+    await supabase.from('attendance').delete().eq('student_id', id)
+    const { error } = await supabase.from('students').delete().eq('id', id)
+    if (error) { toast.error(error.message) } else { toast.success('Student deleted!'); load() }
+  }
+
   return (
     <>
       <div className="page-header">
@@ -98,6 +106,9 @@ export default function Students() {
                     <button onClick={() => openEdit(s)}
                       style={{padding:'6px 14px', borderRadius:8, border:'1.5px solid #e2e8f0', background:'white', cursor:'pointer', fontSize:13, fontWeight:600, color:'#475569'}}>
                       Edit
+                    </button>
+                    <button onClick={() => deleteStudent(s.id)} style={{padding:'6px 14px', borderRadius:8, border:'1.5px solid #fee2e2', background:'#fff5f5', cursor:'pointer', fontSize:13, fontWeight:600, color:'#dc2626', marginLeft:8}}>
+                      Delete
                     </button>
                   </td>
                 </tr>

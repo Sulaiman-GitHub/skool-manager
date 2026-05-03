@@ -34,6 +34,14 @@ export default function Fees() {
     setLoading(false)
   }
 
+  const deleteFee = async (f) => {
+    if (window.confirm('Are you sure you want to delete this fee record?')) {
+      const { error } = await supabase.from('fees').delete().eq('id', f.id)
+      if (error) toast.error(error.message)
+      else { toast.success('Fee record deleted!'); load() }
+    }
+  }
+
   return (
     <>
       <div className="page-header">
@@ -50,11 +58,11 @@ export default function Fees() {
           </div>
           <table>
             <thead>
-              <tr>{['Student', 'Term', 'Year', 'Amount Due', 'Amount Paid', 'Balance', 'Status'].map(h => <th key={h}>{h}</th>)}</tr>
+              <tr>{['Student', 'Term', 'Year', 'Amount Due', 'Amount Paid', 'Balance', 'Status', 'Actions'].map(h => <th key={h}>{h}</th>)}</tr>
             </thead>
             <tbody>
               {fees.length === 0 ? (
-                <tr><td colSpan={7}><div className="empty-state">
+                <tr><td colSpan={8}><div className="empty-state">
                   <div style={{fontSize:40, marginBottom:12}}>💰</div>
                   <div style={{fontWeight:600, color:'#475569', marginBottom:4}}>No fee records yet</div>
                   <div>Add students first, then record their fees</div>
@@ -71,6 +79,11 @@ export default function Fees() {
                     <span className={`badge ${f.status === 'paid' ? 'badge-green' : f.status === 'partial' ? 'badge-yellow' : 'badge-red'}`}>
                       {f.status.charAt(0).toUpperCase() + f.status.slice(1)}
                     </span>
+                  </td>
+                  <td>
+                    <button onClick={() => deleteFee(f)} style={{padding:'6px 14px', borderRadius:8, border:'1.5px solid #fee2e2', background:'#fff5f5', cursor:'pointer', fontSize:13, fontWeight:600, color:'#dc2626'}}>
+                      Delete
+                    </button>
                   </td>
                 </tr>
               ))}

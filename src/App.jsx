@@ -6,6 +6,8 @@ import Dashboard from './pages/Dashboard'
 import Students from './pages/Students'
 import Fees from './pages/Fees'
 import Attendance from './pages/Attendance'
+import Classes from './pages/Classes'
+import Reports from './pages/Reports'
 import Layout from './components/Layout'
 
 function ProtectedRoute({ children }) {
@@ -24,8 +26,10 @@ export default function App() {
           <Route path="/" element={<ProtectedRoute><Layout /></ProtectedRoute>}>
             <Route index element={<Dashboard />} />
             <Route path="students" element={<Students />} />
+            <Route path="classes" element={<Classes />} />
             <Route path="fees" element={<Fees />} />
             <Route path="attendance" element={<Attendance />} />
+            <Route path="reports" element={<Reports />} />
           </Route>
         </Routes>
       </BrowserRouter>
