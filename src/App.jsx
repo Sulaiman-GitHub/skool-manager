@@ -8,6 +8,8 @@ import Fees from './pages/Fees'
 import Attendance from './pages/Attendance'
 import Classes from './pages/Classes'
 import Reports from './pages/Reports'
+import Subjects from './pages/Subjects'
+import Marks from './pages/Marks'
 import Layout from './components/Layout'
 
 function ProtectedRoute({ children }) {
@@ -27,6 +29,8 @@ export default function App() {
             <Route index element={<Dashboard />} />
             <Route path="students" element={<Students />} />
             <Route path="classes" element={<Classes />} />
+            <Route path="subjects" element={<Subjects />} />
+            <Route path="marks" element={<Marks />} />
             <Route path="fees" element={<Fees />} />
             <Route path="attendance" element={<Attendance />} />
             <Route path="reports" element={<Reports />} />

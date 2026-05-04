@@ -1,11 +1,13 @@
 import { Outlet, NavLink, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
-import { LayoutDashboard, Users, Wallet, ClipboardList, LogOut, BookOpen, FileText } from 'lucide-react'
+import { LayoutDashboard, Users, Wallet, ClipboardList, LogOut, BookOpen, FileText, ClipboardEdit } from 'lucide-react'
 
 const links = [
   { to: '/', icon: LayoutDashboard, label: 'Dashboard' },
   { to: '/students', icon: Users, label: 'Students' },
   { to: '/classes', icon: BookOpen, label: 'Classes' },
+  { to: '/subjects', icon: BookOpen, label: 'Subjects' },
+  { to: '/marks', icon: ClipboardEdit, label: 'Marks' },
   { to: '/fees', icon: Wallet, label: 'Fees' },
   { to: '/attendance', icon: ClipboardList, label: 'Attendance' },
   { to: '/reports', icon: FileText, label: 'Reports' },
